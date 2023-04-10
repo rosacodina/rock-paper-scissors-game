@@ -19,6 +19,16 @@ class GameApp extends LitElement {
 			font-family: 'PT Sans', sans-serif;
 			font-family: 'Raleway', sans-serif;		
 			}
+
+			@media screen and (min-width: 768px) {
+        section {
+          display: none;
+        }
+        span {
+          display: none;
+        }
+      }
+
   `;
 
   constructor() {
@@ -41,7 +51,7 @@ class GameApp extends LitElement {
     const output = this.renderRoot.querySelector("#app");
     const router = new Router(output);
     router.setRoutes([
-      {path: "/", component: "home-app"},
+      {path: "/home", component: "home-app"},
     ]);
   }
 }
