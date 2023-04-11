@@ -1,14 +1,10 @@
 import { LitElement, html, css } from 'lit';
-import "../src/components/home-app";
-import "../src/components/header-app";
-
-
 import {Router} from "@vaadin/router";
+import "../src/components/home-app";
 
 class GameApp extends LitElement {
 
   static properties = {
-    header: String,
   }
 
   static styles = css`
@@ -33,14 +29,11 @@ class GameApp extends LitElement {
 
   constructor() {
     super();
-    this.header = 'My app';
   }
 
   render() {
     return html`
-      <div>
-        <header-app></header-app>
-        <home-app></home-app>
+      <div id="app">
       </div>
       
     
@@ -49,9 +42,11 @@ class GameApp extends LitElement {
 
   firstUpdated() {
     const output = this.renderRoot.querySelector("#app");
-    const router = new Router(output);
+    const router = new Router(output); 
     router.setRoutes([
-      {path: "/home", component: "home-app"},
+      {path: "/", component: "home-app"},
+      {path: "(.*)", component: "home-app"}, 
+
     ]);
   }
 }

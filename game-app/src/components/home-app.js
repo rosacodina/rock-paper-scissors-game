@@ -1,10 +1,15 @@
 import { LitElement, html, css } from "lit";
+import {when} from "lit/directives/when.js";
+import "./header-app.js";
+import "./game-view.js";
 
 export class HomeApp extends LitElement {
   static get properties() {
     return {
-      page: String,
-			input: String,
+      page: {type: String},
+			input: {type: String},
+			invalidUSer: {type: Boolean},
+			showGame : {type: Boolean}
     }
   }
 
@@ -12,6 +17,8 @@ export class HomeApp extends LitElement {
     super();
     this.page = "home";
 		this.input = "";
+		this.invalidUSer = false;
+		this.showGame = false;
   }
 
   static styles = css`
@@ -71,40 +78,57 @@ export class HomeApp extends LitElement {
 			border-color:  #75c2f981;
 			background-color: #75c2f981;
 		}
-  `;
 
-    render() {
-      return html`
-      <section>
-				<div> 
-					<h2>Create a new player</h2>
-					<input
-						@input="${this.handleInput}"
-						type="text"
-						placeholder="Player name"
-					>  
-					<button @click="${this.handleClick}">Join</button>
-					<p id="#welcome">Welcome ${this.input}</p> 
-				</div>      
-    	</section>
-        `;
-    }
-
-		handleInput(event) {
-			this.input = event.target.value;
+		.valid-user--toggle {
+			transform: translateX(0%);
+			transition: all 0.3s linear;
 		}
 
-		handleClick() {
-			if (this.input === "") {
-				this.error = "Please, introduce a valid name"
+		.invalid-user--toggle {
+			transform: translateX(0%);
+		}
+  `;
+
+  render() {
+    return html`
+	  	<header-app></header-app>
+			${when(this.showGame,
+				() => html`<game-view></game-view>`,
+				() => html`
+					<section>
+							<div> 
+								<h2>Create a new player</h2>
+								<input
+									@input=${(ev)=>this.input = ev.target.value}
+									type="text"
+									placeholder="Player name"
+								>  
+								<button id="button" @click=${this.handleInput}>Join</button>
+								
+								${this.invalidUSer
+									? html `<p>Your user name ${this.input} is not valid, please try again</p>`
+									: html ``} 
+							</div>
+						</section>
+					`
+				)}	
+    `;
+  }
+
+		handleInput() {
+			if (this.input.length > 0) {
+				this.invalidUSer = false;
+				this.goGame();
 			} else {
-				
+				this.invalidUSer = true;
 			}
 		}
 
+		goGame() {
+			this.page = "game";
+			this.showGame = true;
+		}
 
-
-		
 }
 
 customElements.define("home-app", HomeApp);

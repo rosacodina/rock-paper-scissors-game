@@ -7,8 +7,8 @@ export class HeaderApp extends LitElement {
 
 	constructor() {
 		super();
-		this.page = "home";
-}
+		this.page = "header";
+	}
 	
 	static styles = [
     css`
@@ -92,8 +92,6 @@ export class HeaderApp extends LitElement {
 					opacity: 0;
 				}
 			}
-
-		
     `
   ];
 
@@ -102,9 +100,9 @@ export class HeaderApp extends LitElement {
 			<section>
 				<h1>Rock, paper, scissors</h1>
 				<div>
-					<img src="../assets/header/scissors.png" alt="Scissors image">
-					<img src="../assets/header/paper.png" alt="Paper image">
-					<img src="../assets/header/game.png" alt="Game image">
+					<img src="../src/assets/header/game.png" alt="Scissors image">
+					<img src="./src/assets/header/paper.png" alt="Paper image">
+					<img src="./src/assets/header/scissors.png" alt="Game image">
 				</div>
 			</section>
 		`;
