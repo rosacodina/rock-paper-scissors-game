@@ -45,6 +45,7 @@ class GameApp extends LitElement {
     const router = new Router(output); 
     router.setRoutes([
       {path: "/", component: "home-app"},
+      {path: "/game", component: "game-app"},
       {path: "(.*)", component: "home-app"}, 
 
     ]);

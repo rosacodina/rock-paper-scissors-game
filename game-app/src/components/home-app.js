@@ -1,7 +1,7 @@
 import { LitElement, html, css } from "lit";
 import {when} from "lit/directives/when.js";
 import "./header-app.js";
-import "./game-view.js";
+import "./views/game-view.js";
 
 export class HomeApp extends LitElement {
   static get properties() {
@@ -28,15 +28,13 @@ export class HomeApp extends LitElement {
       flex-direction: column;
     }
 
-		@media screen and (min-width: 768px) {
-      section {
-        display: none;
+		@media screen and (min-width: 820px) {
+        div {
+          width: 80%;
+					height: 350px;
+        } 
       }
-      span {
-        display: none;
-      }
-    }
-
+			
 		section {
 			padding-left: 23%;
 			padding-top: 25%;
@@ -93,32 +91,37 @@ export class HomeApp extends LitElement {
     return html`
 	  	<header-app></header-app>
 			${when(this.showGame,
-				() => html`<game-view></game-view>`,
+				() => html`<game-view player-name="${this.input}"></game-view>`,
 				() => html`
 					<section>
-							<div> 
-								<h2>Create a new player</h2>
-								<input
-									@input=${(ev)=>this.input = ev.target.value}
-									type="text"
-									placeholder="Player name"
-								>  
-								<button id="button" @click=${this.handleInput}>Join</button>
+						<div> 
+							<h2>Create a new player</h2>
+							<input
+								@input=${(ev)=>this.input = ev.target.value}
+								type="text"
+								placeholder="Player name"
+							>  
+							<button id="button" @click=${this.handleInput}>Join</button>
 								
-								${this.invalidUSer
-									? html `<p>Your user name ${this.input} is not valid, please try again</p>`
-									: html ``} 
-							</div>
-						</section>
-					`
-				)}	
+							${this.invalidUSer
+								? html `<p>Your user name ${this.input} is not valid, please try again</p>`
+								: html ``} 
+						</div>
+					</section>
+				`
+			)}	
     `;
   }
 
-		handleInput() {
+		handleInput(event) {
 			if (this.input.length > 0) {
 				this.invalidUSer = false;
 				this.goGame();
+				this.input = new CustomEvent("player-name", {
+					bubbles: true,
+					composed: true,
+				});
+				this.dispatchEvent(event)
 			} else {
 				this.invalidUSer = true;
 			}
@@ -127,6 +130,7 @@ export class HomeApp extends LitElement {
 		goGame() {
 			this.page = "game";
 			this.showGame = true;
+			this.dispatchEvent(new CustomEvent("start-game", {detail: {playerName: this.input}}));
 		}
 
 }

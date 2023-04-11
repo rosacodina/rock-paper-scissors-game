@@ -2,7 +2,7 @@ import { LitElement, html, css } from 'lit';
 
 export class HeaderApp extends LitElement {
 	static properties = {
-    page: String,
+    page: {type:String},
   }
 
 	constructor() {
@@ -16,13 +16,10 @@ export class HeaderApp extends LitElement {
         display: block;
       }
 
-			@media screen and (min-width: 768px) {
-        section {
-          display: none;
-        }
-        span {
-          display: none;
-        }
+			@media screen and (min-width: 820px) {
+        h1 {
+          font-size: 50px;
+        } 
       }
 			
 			section {
