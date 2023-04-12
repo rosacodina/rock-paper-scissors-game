@@ -37,7 +37,7 @@ export class HomeApp extends LitElement {
 			
 		section {
 			padding-left: 23%;
-			padding-top: 25%;
+			padding-top: 20%;
 			justify-content: center;
 		}
 
@@ -47,15 +47,15 @@ export class HomeApp extends LitElement {
 			align-items: center;
 			background-image: linear-gradient(to bottom right, #75c2f981, #a371bc94);
 			width: 70%;
-			height: 200px;
+			height: 230px;
 			border-radius: 15px;
-			padding-top: 10%;
+			padding-top: 8%;
 		}
 
     h2 {
       color: black;
 			width: 100%;
-			font-size: 17px;
+			font-size: 25px;
 			text-align: center;
     }
 
@@ -63,15 +63,17 @@ export class HomeApp extends LitElement {
 			width: 60%;
 			height: 30px;
 			text-align: center;
-			margin-bottom: 15px;
+			font-size: 16px;
+			margin-bottom: 22px;
 			border-radius: 15px;
 			border-color:  #75c2f981;
 		}
 
 		button {
 			width: 41%;
-			height: 30px;
-			margin-bottom: 5%;
+			height: 40px;
+			font-size: 20px;
+			margin-bottom: 20px;
 			border-radius: 15px;
 			border-color:  #75c2f981;
 			background-color: #75c2f981;
@@ -91,7 +93,7 @@ export class HomeApp extends LitElement {
     return html`
 	  	<header-app></header-app>
 			${when(this.showGame,
-				() => html`<game-view player-name="${this.input}"></game-view>`,
+				() => html`<game-view .playerName=${this.input}></game-view>`,
 				() => html`
 					<section>
 						<div> 
@@ -117,11 +119,6 @@ export class HomeApp extends LitElement {
 			if (this.input.length > 0) {
 				this.invalidUSer = false;
 				this.goGame();
-				this.input = new CustomEvent("player-name", {
-					bubbles: true,
-					composed: true,
-				});
-				this.dispatchEvent(event)
 			} else {
 				this.invalidUSer = true;
 			}

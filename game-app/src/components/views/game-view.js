@@ -5,7 +5,13 @@ export class GameView extends LitElement {
     return {
       page: {type: String},
 			playerName: {type: String},
-			rock: {type: Boolean}
+			playerSelection: {type: String},
+			botSelection: {type: String},
+			rock: {type: Boolean},
+			paper: {type: Boolean},
+			scissors: {type: Boolean},
+			winner: {type: String}
+
     }
   }
 
@@ -13,7 +19,12 @@ export class GameView extends LitElement {
     super();
     this.page = "game";
 		this.inputValue = "";
+		this.botSelection = "";
 		this.rock = false;
+		this.paper = false;
+		this.scissors = false;
+		this.playerSelection = "";
+		this.winner = "";
   }
 
   static styles = [
@@ -27,6 +38,7 @@ export class GameView extends LitElement {
 				padding-left: 5%;
 				padding-top: 3%;
 				justify-content: center;
+				
 			}
 
 			ul {
@@ -41,18 +53,17 @@ export class GameView extends LitElement {
 			}
 
 			a {
-				margin-left: 8%;
-				font-size: 18px;
+				margin-left: 5%;
+				font-size: 22px;
 				float: left;
+				font-weight: bold;
 			}
 
-			.exit {
+			.exitHome {
 				width: 49px;
 				height: 49px;
 				margin-top: -10px;
-				margin-left: 1055%;
-
-
+				margin-left: 450px;
 			}
 
 			.game-box {
@@ -63,8 +74,27 @@ export class GameView extends LitElement {
 				width: 95%;
 				height: 450px;
 				border-radius: 15px;
-				padding-top: 10%;
+				padding-top: 6%;
 				margin-bottom: 5%;
+				font-size: 19px;
+				font-weight: bold;
+			}
+
+			.chose-option {
+				display: flex;
+				flex-direction: row;
+				width: 60%;
+				justify-content: space-evenly;
+			}
+
+			.player-chose {
+				color: #b32fdbd4;
+				font-weight: bold;
+			}
+
+			.bot-chose {
+				color: #123a8ad2;
+				font-weight: bold;
 			}
 
 			button {
@@ -89,34 +119,39 @@ export class GameView extends LitElement {
 				<nav>
 					<ul>
 						<li>
-							<a>Player ${this.playerName}</a>
+							<a>Player: ${this.playerName}</a>
 						</li>
 						
 						<li>
 							<a @click="${this.goHome}" href="/home">
-							<img class="exit" src="../src/assets/game/home.png"></a>
+							<img class="exitHome" src="../src/assets/game/home.png"></a>
 						</li>
 					</ul>
-
 				</nav>
 					
 				<div class="game-box">
-					<p>${this.playerName} score: </p>
-					<p>You chose: ${this.rock}  - Bot: </p>
+					<p class="score">${this.playerName} score is: </p>
+					
+					<div class="chose-option">
+						<p class="player-chose">You chose: ${this.playerSelection} </p>
+						<p class="bot-chose">Bot chose: ${this.botSelection}</p>
+					</div>
 
 					<div>
 						<button @click="${this.rockClicked}">
 						<img src="../src/assets/game/rock.jpg">
 						</button>
 
-						<button>
+						<button @click="${this.paperClicked}">
 							<img src="../src/assets/game/paper.jpg"></a>
 						</button>
-						<button>
+
+						<button @click="${this.scissorsClicked}">
 							<img src="../src/assets/game/scissors.jpg"></a>
 						</button>
 					</div>
 
+					<p id="result-message">${this.resultMessage}</p>
 				</div>
 			</section>
 		`;
@@ -129,7 +164,64 @@ export class GameView extends LitElement {
 	}
 
 	rockClicked() {
+		this.playerSelection = "rock";
 		this.rock = true;
+		setTimeout(() => {
+			this.botSelection = this.botPlay();
+			this.getWinner(this.playerSelection, this.botSelection);
+		}, 1000);
 	}
+
+	paperClicked() {
+		this.playerSelection = "paper";
+		this.rock = false;
+		setTimeout(() => {
+			this.botSelection = this.botPlay();
+			this.getWinner(this.playerSelection, this.botSelection);
+		}, 1000);
+	}
+
+	scissorsClicked() {
+		this.playerSelection = "scissors";
+		this.rock = false;
+		setTimeout(() => {
+			this.botSelection = this.botPlay();
+			this.getWinner(this.playerSelection, this.botSelection);
+		}, 1000);
+	}
+
+	botPlay() {
+		const randomSelection = Math.random();
+		let botSelection = "";
+
+		if (randomSelection < 0.33) {
+			botSelection = "rock";
+		} else if (randomSelection < 0.66) {
+			botSelection = "paper";
+		} else {
+			botSelection = "scissors";
+		}
+		return botSelection;
+	}
+
+	getWinner(playerSelection, botSelection) {
+		if (
+				(playerSelection === "rock" && botSelection === "scissors") ||
+				(playerSelection === "paper" && botSelection === "rock") ||
+				(playerSelection === "scissors" && botSelection === "paper")) {
+					//In this if, player wins
+					this.resultMessage = this.playerName + " player wins";
+			} else if (
+				(botSelection === "rock" && playerSelection === "scissors") ||
+				(botSelection === "paper" && playerSelection === "rock") ||
+				(botSelection === "scissors" && playerSelection === "paper")) {
+					//In this else if, bot wins
+					this.resultMessage = "Bot wins";
+				} else {
+					this.resultMessage = "There is a tie in the game";
+				}
+	}
+
+	
 }
 customElements.define('game-view', GameView);

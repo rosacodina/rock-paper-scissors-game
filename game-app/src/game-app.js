@@ -12,8 +12,6 @@ class GameApp extends LitElement {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-			font-family: 'PT Sans', sans-serif;
-			font-family: 'Raleway', sans-serif;		
 			}
 
 			@media screen and (min-width: 768px) {
