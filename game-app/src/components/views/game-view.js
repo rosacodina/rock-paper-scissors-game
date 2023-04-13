@@ -7,24 +7,22 @@ export class GameView extends LitElement {
 			playerName: {type: String},
 			playerSelection: {type: String},
 			botSelection: {type: String},
-			rock: {type: Boolean},
-			paper: {type: Boolean},
-			scissors: {type: Boolean},
-			winner: {type: String}
-
+			winner: {type: String},
+			playerScore: {type: Number}
     }
-  }
+  }  //TEST:calcular bien los ganadores: muchos test que cubran las posibilidades
+  //o un caso de cada opcion (gana jugador
+	//gana maq, empate))
 
 	constructor() {
     super();
     this.page = "game";
+		this.playerName = "";
 		this.inputValue = "";
 		this.botSelection = "";
-		this.rock = false;
-		this.paper = false;
-		this.scissors = false;
 		this.playerSelection = "";
 		this.winner = "";
+		this.playerScore = 0;
   }
 
   static styles = [
@@ -36,7 +34,6 @@ export class GameView extends LitElement {
 			section {
 				height: 100%;
 				padding-left: 5%;
-				padding-top: 3%;
 				justify-content: center;
 				
 			}
@@ -45,15 +42,17 @@ export class GameView extends LitElement {
 				background-image: linear-gradient(to bottom right, #5e70b181, #4a65af81, #7589e381, #6373a981);
 				width: 89.9%;
 				border-radius: 15px;
-				margin-bottom: 4%;
-				padding-top: 1.6%;
+				margin-bottom: 3%;
 				overflow: hidden;
 				list-style: none;
-				height: 40px;
+				height: 50px;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;			
 			}
 
 			a {
-				margin-left: 5%;
+				padding-right: 2%;
 				font-size: 22px;
 				float: left;
 				font-weight: bold;
@@ -62,8 +61,7 @@ export class GameView extends LitElement {
 			.exitHome {
 				width: 49px;
 				height: 49px;
-				margin-top: -10px;
-				margin-left: 450px;
+				margin-left: 25%;
 			}
 
 			.game-box {
@@ -109,9 +107,43 @@ export class GameView extends LitElement {
 				margin-right: 10px;
 			}
 
-			
-      `
-    ];
+			@media screen and (min-width: 1024px) {
+				ul {
+					padding-left: 23%;
+					margin-top: 2%;
+					width: 72%;
+					height: 190px;
+				}
+
+				a {
+					font-size: 85px;
+					padding-right: 2%;
+				}
+				
+				.game-box {
+					height: 1300px;
+					margin-top: 2%;
+					font-size: 100px;
+				}
+
+				.exit-icon {
+					width: 450px;
+					height: 450px;
+				}
+
+				.score {
+					margin-top: -200px;
+				}
+
+				img {
+					width: 600px;
+					height: 600px;
+				}
+
+
+			}
+    `
+  ];
 
   render() {
     return html`
@@ -119,18 +151,18 @@ export class GameView extends LitElement {
 				<nav>
 					<ul>
 						<li>
-							<a>Player: ${this.playerName}</a>
+							<a @click="${this.goHome}" href="/home" class="exit-icon">
+							<img class="exitHome" src="../src/assets/game/home.png"></a>
 						</li>
 						
 						<li>
-							<a @click="${this.goHome}" href="/home">
-							<img class="exitHome" src="../src/assets/game/home.png"></a>
+							<a>Player: ${this.playerName}</a>
 						</li>
 					</ul>
 				</nav>
 					
 				<div class="game-box">
-					<p class="score">${this.playerName} score is: </p>
+					<p class="score">${this.playerName} score is: ${this.playerScore}</p>
 					
 					<div class="chose-option">
 						<p class="player-chose">You chose: ${this.playerSelection} </p>
@@ -157,15 +189,25 @@ export class GameView extends LitElement {
 		`;
   }
 
+	/*
+	optionClicked() {
+		this.playerSelection = option;
+		setTimeout(() =>  {
+			this.botSelection = this.botPlay();
+			this.getWinner(this.playerSelection, this.botSelection);
+		}, 1000);
+	}
+
+	in teh button instead what I have I have to put this: @click="${() => this.optionClicked('scissors')}"
+	*/
 
 	goHome(event) {
 		event.preventDefault();
 		window.location.href = "/";
 	}
 
-	rockClicked() {
+	rockClicked() { //DEJAR EN UNA SOLA FUNCIÓN
 		this.playerSelection = "rock";
-		this.rock = true;
 		setTimeout(() => {
 			this.botSelection = this.botPlay();
 			this.getWinner(this.playerSelection, this.botSelection);
@@ -174,16 +216,14 @@ export class GameView extends LitElement {
 
 	paperClicked() {
 		this.playerSelection = "paper";
-		this.rock = false;
 		setTimeout(() => {
 			this.botSelection = this.botPlay();
 			this.getWinner(this.playerSelection, this.botSelection);
 		}, 1000);
 	}
-
+ 
 	scissorsClicked() {
 		this.playerSelection = "scissors";
-		this.rock = false;
 		setTimeout(() => {
 			this.botSelection = this.botPlay();
 			this.getWinner(this.playerSelection, this.botSelection);
@@ -205,23 +245,22 @@ export class GameView extends LitElement {
 	}
 
 	getWinner(playerSelection, botSelection) {
-		if (
+		if (//else if, el empate y botselection =playerselection. Else ha ganado la máquina
 				(playerSelection === "rock" && botSelection === "scissors") ||
 				(playerSelection === "paper" && botSelection === "rock") ||
 				(playerSelection === "scissors" && botSelection === "paper")) {
 					//In this if, player wins
 					this.resultMessage = this.playerName + " player wins";
+					this.playerScore++;
 			} else if (
-				(botSelection === "rock" && playerSelection === "scissors") ||
-				(botSelection === "paper" && playerSelection === "rock") ||
-				(botSelection === "scissors" && playerSelection === "paper")) {
+				(botSelection === playerSelection)) {
 					//In this else if, bot wins
-					this.resultMessage = "Bot wins";
-				} else {
 					this.resultMessage = "There is a tie in the game";
+
+				} else {
+					this.resultMessage = "Bot wins";
+					this.playerScore--;
 				}
 	}
-
-	
 }
 customElements.define('game-view', GameView);

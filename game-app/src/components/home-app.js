@@ -9,10 +9,11 @@ export class HomeApp extends LitElement {
       page: {type: String},
 			input: {type: String},
 			invalidUSer: {type: Boolean},
-			showGame : {type: Boolean}
+			showGame: {type: Boolean}
     }
   }
-
+//Cuando hacemos goGame, this.page va a valer game/cuand el input es invalido el invaliduser is true
+//showGame es true cuando page es game
   constructor() {
     super();
     this.page = "home";
@@ -22,23 +23,17 @@ export class HomeApp extends LitElement {
   }
 
   static styles = css`
+
+		
     :host {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
-
-		@media screen and (min-width: 820px) {
-        div {
-          width: 80%;
-					height: 350px;
-        } 
-      }
 			
 		section {
-			padding-left: 23%;
+			margin-left: 30%;
 			padding-top: 20%;
-			justify-content: center;
 		}
 
 		div {
@@ -87,6 +82,41 @@ export class HomeApp extends LitElement {
 		.invalid-user--toggle {
 			transform: translateX(0%);
 		}
+
+		@media screen and (min-width: 1024px) {
+			section {
+				padding-left: 16%;
+				padding-top: 3%;
+				justify-content: center;
+			}
+
+			div {
+				width: 80%;
+				height: 1000px;
+				margin-bottom: 2%;
+				padding-top: 4%;
+			}
+
+			h2 {
+				font-size: 85px;
+				margin-bottom: 2%;
+			}
+
+			input {
+				width: 80%;
+				height: 150px;
+				font-size: 80px;
+				margin-bottom: 1%;
+			}
+
+			button {
+				height: 130px;
+				font-size: 80px;
+				margin-top: 45px;
+			}
+
+
+      }
   `;
 
   render() {
@@ -99,7 +129,7 @@ export class HomeApp extends LitElement {
 						<div> 
 							<h2>Create a new player</h2>
 							<input
-								@input=${(ev)=>this.input = ev.target.value}
+								@input=${(ev)=>this.input = ev.target.value.toUpperCase()}
 								type="text"
 								placeholder="Player name"
 							>  
@@ -115,17 +145,16 @@ export class HomeApp extends LitElement {
     `;
   }
 
-		handleInput(event) {
+		handleInput() {
 			if (this.input.length > 0) {
 				this.invalidUSer = false;
 				this.goGame();
 			} else {
 				this.invalidUSer = true;
 			}
-		}
+		}  //3 tests: 1-page es game despue de ejecutar la funcion, showGame que sea true y que despacho el evento
 
 		goGame() {
-			this.page = "game";
 			this.showGame = true;
 			this.dispatchEvent(new CustomEvent("start-game", {detail: {playerName: this.input}}));
 		}

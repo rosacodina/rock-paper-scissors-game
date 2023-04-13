@@ -2,12 +2,10 @@ import { LitElement, html, css } from 'lit';
 
 export class HeaderApp extends LitElement {
 	static properties = {
-    page: {type:String},
   }
 
 	constructor() {
 		super();
-		this.page = "header";
 	}
 	
 	static styles = [
@@ -16,12 +14,6 @@ export class HeaderApp extends LitElement {
         display: block;
       }
 
-			@media screen and (min-width: 820px) {
-        h1 {
-          font-size: 50px;
-        } 
-      }
-			
 			section {
         padding-top: 1%;
         background-image: linear-gradient(to bottom right,   #FF6EC4, #902fcc, #7e4fe3, #643dab, #6ea3ff, #506fc0, #71a2d3, #3c77cf);
@@ -29,28 +21,30 @@ export class HeaderApp extends LitElement {
         height: 42%;
         padding: 10% 0;
         clip-path: polygon(0 0, 180% 0, 10% 140%, 0 100%);
+				display: flex;
+				flex-direction: column;
       }
 
       h1 {
         text-align: center;
         margin-top: -9px;
         color: white;
+				width: 100%;
       }
 
 			div {
 				position: relative;
-				width:100px;
+				width:85%;
 				height: 100px;
-				overflow: hidden;
-				margin-left: 44%;
+				margin-left: 43%;
 			}
 
 			img {
 				position: absolute;
 				top: 0;
 				left: 0;
-				width: 100%;
-				height: 100%;
+				width: 100px;
+				height: 100px;
 				opacity: 0;
 				z-index: 1;
 				animation: fade 5s ease-in-out infinite;
@@ -89,6 +83,38 @@ export class HeaderApp extends LitElement {
 					opacity: 0;
 				}
 			}
+
+			@media screen and (min-width: 1024px) {
+        section {
+					height: 90px;
+					margin-top: -250px;
+					justify-content: center;
+					align-items: center;
+					display: flex;
+					flex-direction: column;
+
+				}
+				
+				h1 {
+          font-size: 100px;
+					margin-bottom: 55px;
+					width: 100%;
+        } 
+
+				div {
+					width: 85%;
+					height: 600px;
+					margin-left: 52%;
+
+				}
+
+				img {
+					margin-left: 10%;
+					width: 350px;
+					height: 350px;
+
+				}
+      }
     `
   ];
 
