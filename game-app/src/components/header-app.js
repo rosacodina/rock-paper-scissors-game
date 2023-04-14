@@ -86,7 +86,7 @@ export class HeaderApp extends LitElement {
 
 			@media screen and (min-width: 1024px) {
         section {
-					height: 90px;
+					height: 220px;
 					margin-top: -250px;
 					justify-content: center;
 					align-items: center;
@@ -97,7 +97,8 @@ export class HeaderApp extends LitElement {
 				
 				h1 {
           font-size: 100px;
-					margin-bottom: 55px;
+					margin-top: 180px;
+					margin-bottom: 20px;
 					width: 100%;
         } 
 
@@ -110,8 +111,8 @@ export class HeaderApp extends LitElement {
 
 				img {
 					margin-left: 10%;
-					width: 350px;
-					height: 350px;
+					width: 120px;
+					height: 120px;
 
 				}
       }

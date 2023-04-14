@@ -9,7 +9,7 @@
     "analyze": "cem analyze --litelement",
     "start": "web-dev-server",
     "test": "web-test-runner test/**/*.test.js --node-resolve",
-    "test:unit": "web-test-runner",
+    "test:unit": "web-test-runner test/**/*.test.js --node-resolve",
     "test:unit:watch": "web-test-runner --watch",
     "test:unit:coverage": "npm run test:unit -- --coverage"
   },

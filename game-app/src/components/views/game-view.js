@@ -109,35 +109,26 @@ export class GameView extends LitElement {
 
 			@media screen and (min-width: 1024px) {
 				ul {
-					padding-left: 23%;
+					padding-left: 2%;
 					margin-top: 2%;
-					width: 72%;
+					width: 92%;
 					height: 190px;
 				}
 
 				a {
-					font-size: 85px;
+					font-size: 30px;
 					padding-right: 2%;
 				}
 				
 				.game-box {
 					height: 1300px;
 					margin-top: 2%;
-					font-size: 100px;
-				}
-
-				.exit-icon {
-					width: 450px;
-					height: 450px;
-				}
-
-				.score {
-					margin-top: -200px;
+					font-size: 40px;
 				}
 
 				img {
-					width: 600px;
-					height: 600px;
+					width: 300px;
+					height: 300px;
 				}
 
 
@@ -156,7 +147,7 @@ export class GameView extends LitElement {
 						</li>
 						
 						<li>
-							<a>Player: ${this.playerName}</a>
+							<a>Welcome: ${this.playerName}</a>
 						</li>
 					</ul>
 				</nav>
@@ -200,6 +191,12 @@ export class GameView extends LitElement {
 
 	in teh button instead what I have I have to put this: @click="${() => this.optionClicked('scissors')}"
 	*/
+
+	startGame(event) {
+		this.page = "game";
+		this.shadowRoot.querySelector("game-view").playerName = event.detail.playerName;
+		this.shadowRoot.querySelector("game-view").playerScore = event.detail.playerScore;
+	}
 
 	goHome(event) {
 		event.preventDefault();
