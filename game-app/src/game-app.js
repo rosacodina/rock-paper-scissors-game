@@ -1,7 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import {Router} from "@vaadin/router";
 import "../src/components/home-app";
-import "../public/service-worker.js";
 
 class GameApp extends LitElement {
   static properties = {
@@ -22,7 +21,6 @@ class GameApp extends LitElement {
           display: none;
         }
       }
-
   `;
 
   constructor() {
@@ -44,13 +42,6 @@ class GameApp extends LitElement {
       {path: "(.*)", component: "home-app"}, 
     ]);
   }
-
-  /*if('serviceWorker' in navigator) {
-    window.addEventListener("load", function() {
-      navigator.serviceWorker.register("/service-worker.js");
-    });
-  }
-  */
 }
 
 customElements.define('game-app', GameApp);

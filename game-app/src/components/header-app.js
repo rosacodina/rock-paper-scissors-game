@@ -92,7 +92,6 @@ export class HeaderApp extends LitElement {
 					align-items: center;
 					display: flex;
 					flex-direction: column;
-
 				}
 				
 				h1 {
@@ -106,14 +105,12 @@ export class HeaderApp extends LitElement {
 					width: 85%;
 					height: 600px;
 					margin-left: 52%;
-
 				}
 
 				img {
 					margin-left: 10%;
 					width: 120px;
 					height: 120px;
-
 				}
       }
     `

@@ -10,15 +10,12 @@ export class GameView extends LitElement {
 			winner: {type: String},
 			playerScore: {type: Number}
     }
-  }  //TEST:calcular bien los ganadores: muchos test que cubran las posibilidades
-  //o un caso de cada opcion (gana jugador
-	//gana maq, empate))
+  }
 
 	constructor() {
     super();
     this.page = "game";
 		this.playerName = "";
-		this.inputValue = "";
 		this.botSelection = "";
 		this.playerSelection = "";
 		this.winner = "";
@@ -130,8 +127,6 @@ export class GameView extends LitElement {
 					width: 300px;
 					height: 300px;
 				}
-
-
 			}
     `
   ];
@@ -180,18 +175,6 @@ export class GameView extends LitElement {
 		`;
   }
 
-	/*
-	optionClicked() {
-		this.playerSelection = option;
-		setTimeout(() =>  {
-			this.botSelection = this.botPlay();
-			this.getWinner(this.playerSelection, this.botSelection);
-		}, 1000);
-	}
-
-	in teh button instead what I have I have to put this: @click="${() => this.optionClicked('scissors')}"
-	*/
-
 	startGame(event) {
 		this.page = "game";
 		this.shadowRoot.querySelector("game-view").playerName = event.detail.playerName;
@@ -199,6 +182,7 @@ export class GameView extends LitElement {
 	}
 
 	goHome(event) {
+		console.log("go Home");
 		event.preventDefault();
 		window.location.href = "/";
 	}
@@ -242,7 +226,7 @@ export class GameView extends LitElement {
 	}
 
 	getWinner(playerSelection, botSelection) {
-		if (//else if, el empate y botselection =playerselection. Else ha ganado la máquina
+		if (
 				(playerSelection === "rock" && botSelection === "scissors") ||
 				(playerSelection === "paper" && botSelection === "rock") ||
 				(playerSelection === "scissors" && botSelection === "paper")) {

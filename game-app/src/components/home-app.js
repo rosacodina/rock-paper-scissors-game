@@ -12,8 +12,7 @@ export class HomeApp extends LitElement {
 			showGame: {type: Boolean},
     }
   }
-//Cuando hacemos goGame, this.page va a valer game/cuand el input es invalido el invaliduser is true
-//showGame es true cuando page es game
+
   constructor() {
     super();
     this.page = "home";
@@ -151,21 +150,9 @@ export class HomeApp extends LitElement {
 			} else {
 				this.invalidUSer = true;
 			}
-		}  //3 tests: 1-page es game despue de ejecutar la funcion, showGame que sea true y que despacho el evento
+		}
 
 		goGame() {
-			/*const existingPlayer = localStorage.getItem(this.input);
-			if(existingPlayer) {
-				const {name, points} = JSON.parse(existingPlayer);
-				this.dispatchEvent(new CustomEvent("start-game", {detail: 
-					{playerName: name, playerScore}
-				}));
-			} else {
-				localStorage.setItem(this.input, JSON.stringify({name: this.input, playerScore: 0}));
-				this.dispatchEvent(new CustomEvent("start-game", {detail:
-				{playerName: this.input, playerScore: 0}
-				}));
-			}*/
 			this.showGame = true;
 			this.dispatchEvent(new CustomEvent("start-game", {detail: {playerName: this.input}}));
 		}
