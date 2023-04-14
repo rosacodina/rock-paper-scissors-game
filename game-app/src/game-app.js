@@ -3,7 +3,6 @@ import {Router} from "@vaadin/router";
 import "../src/components/home-app";
 
 class GameApp extends LitElement {
-
   static properties = {
   }
 
@@ -12,8 +11,6 @@ class GameApp extends LitElement {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-			font-family: 'PT Sans', sans-serif;
-			font-family: 'Raleway', sans-serif;		
 			}
 
 			@media screen and (min-width: 768px) {
@@ -24,7 +21,6 @@ class GameApp extends LitElement {
           display: none;
         }
       }
-
   `;
 
   constructor() {
@@ -35,8 +31,6 @@ class GameApp extends LitElement {
     return html`
       <div id="app">
       </div>
-      
-    
     `;
   }
 
@@ -46,7 +40,6 @@ class GameApp extends LitElement {
     router.setRoutes([
       {path: "/", component: "home-app"},
       {path: "(.*)", component: "home-app"}, 
-
     ]);
   }
 }
