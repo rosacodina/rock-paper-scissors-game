@@ -22,114 +22,114 @@ export class GameView extends LitElement {
 		this.playerScore = 0;
   }
 
-  static styles = [
-    css`
-      :host {
-        display: block;
-      }
+  static get styles() {
+		return css`
+		:host {
+			display: block;
+		}
 
-			section {
-				height: 100%;
-				padding-left: 5%;
-				justify-content: center;
-				
-			}
+		section {
+			height: 100%;
+			padding-left: 5%;
+			justify-content: center;
+			
+		}
 
+		ul {
+			background-image: linear-gradient(to bottom right, #5e70b181, #4a65af81, #7589e381, #6373a981);
+			width: 89.9%;
+			border-radius: 15px;
+			margin-bottom: 3%;
+			overflow: hidden;
+			list-style: none;
+			height: 50px;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;			
+		}
+
+		a {
+			padding-right: 2%;
+			font-size: 22px;
+			float: left;
+			font-weight: bold;
+		}
+
+		.exitHome {
+			width: 49px;
+			height: 49px;
+			margin-left: 25%;
+		}
+
+		.game-box {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			background-image: linear-gradient(to bottom right, #40627a81, #84a6be81, #5f89a781, #7bb4dc81);
+			width: 95%;
+			height: 450px;
+			border-radius: 15px;
+			padding-top: 6%;
+			margin-bottom: 5%;
+			font-size: 19px;
+			font-weight: bold;
+		}
+
+		.chose-option {
+			display: flex;
+			flex-direction: row;
+			width: 60%;
+			justify-content: space-evenly;
+		}
+
+		.player-chose {
+			color: #b32fdbd4;
+			font-weight: bold;
+		}
+
+		.bot-chose {
+			color: #123a8ad2;
+			font-weight: bold;
+		}
+
+		button {
+			background-image: linear-gradient(to bottom right, #40627a81, #84a6be81, #5f89a781, #7bb4dc81);
+			border: none;
+		}
+		
+		img {
+			border-radius: 50%;
+			width: 130px;
+			height: 130px;
+			margin-right: 10px;
+		}
+
+		@media screen and (min-width: 1024px) {
 			ul {
-				background-image: linear-gradient(to bottom right, #5e70b181, #4a65af81, #7589e381, #6373a981);
-				width: 89.9%;
-				border-radius: 15px;
-				margin-bottom: 3%;
-				overflow: hidden;
-				list-style: none;
-				height: 50px;
-				display: flex;
-				flex-direction: row;
-				justify-content: space-between;			
+				padding-left: 2%;
+				margin-top: 2%;
+				width: 92%;
+				height: 190px;
 			}
 
 			a {
+				font-size: 30px;
 				padding-right: 2%;
-				font-size: 22px;
-				float: left;
-				font-weight: bold;
-			}
-
-			.exitHome {
-				width: 49px;
-				height: 49px;
-				margin-left: 25%;
-			}
-
-			.game-box {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				background-image: linear-gradient(to bottom right, #40627a81, #84a6be81, #5f89a781, #7bb4dc81);
-				width: 95%;
-				height: 450px;
-				border-radius: 15px;
-				padding-top: 6%;
-				margin-bottom: 5%;
-				font-size: 19px;
-				font-weight: bold;
-			}
-
-			.chose-option {
-				display: flex;
-				flex-direction: row;
-				width: 60%;
-				justify-content: space-evenly;
-			}
-
-			.player-chose {
-				color: #b32fdbd4;
-				font-weight: bold;
-			}
-
-			.bot-chose {
-				color: #123a8ad2;
-				font-weight: bold;
-			}
-
-			button {
-				background-image: linear-gradient(to bottom right, #40627a81, #84a6be81, #5f89a781, #7bb4dc81);
-				border: none;
 			}
 			
+			.game-box {
+				height: 1300px;
+				margin-top: 2%;
+				font-size: 40px;
+			}
+
 			img {
-				border-radius: 50%;
-				width: 130px;
-				height: 130px;
-				margin-right: 10px;
+				width: 300px;
+				height: 300px;
 			}
-
-			@media screen and (min-width: 1024px) {
-				ul {
-					padding-left: 2%;
-					margin-top: 2%;
-					width: 92%;
-					height: 190px;
-				}
-
-				a {
-					font-size: 30px;
-					padding-right: 2%;
-				}
-				
-				.game-box {
-					height: 1300px;
-					margin-top: 2%;
-					font-size: 40px;
-				}
-
-				img {
-					width: 300px;
-					height: 300px;
-				}
-			}
-    `
-  ];
+		}
+	`
+	} 
 
   render() {
     return html`

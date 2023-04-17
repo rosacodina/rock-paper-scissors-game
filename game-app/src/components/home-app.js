@@ -21,9 +21,8 @@ export class HomeApp extends LitElement {
 		this.showGame = false;
   }
 
-  static styles = css`
-
-		
+  static get styles() {
+		return css`
     :host {
       min-height: 100vh;
       display: flex;
@@ -114,8 +113,9 @@ export class HomeApp extends LitElement {
 				font-size: 80px;
 				margin-top: 45px;
 			}
-    }
+		}  
   `;
+	}
 
   render() {
     return html`

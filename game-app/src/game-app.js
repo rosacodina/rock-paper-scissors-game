@@ -3,10 +3,9 @@ import {Router} from "@vaadin/router";
 import "../src/components/home-app";
 
 class GameApp extends LitElement {
-  static properties = {
-  }
 
-  static styles = css`
+  static get styles() {
+    return css` 
     :host {
       min-height: 100vh;
       display: flex;
@@ -22,9 +21,6 @@ class GameApp extends LitElement {
         }
       }
   `;
-
-  constructor() {
-    super();
   }
 
   render() {
