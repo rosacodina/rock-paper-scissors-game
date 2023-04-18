@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html, css} from "lit";
 import {Router} from "@vaadin/router";
 import "../src/components/home-app";
 
